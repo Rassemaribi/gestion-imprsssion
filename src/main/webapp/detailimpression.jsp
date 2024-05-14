@@ -1,11 +1,87 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.sql.*, common.DB" %>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Liste des demandes d'impression</title>
+    <style>
+        body {
+            font-size: 14px;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+            position: -webkit-sticky; /* Safari */
+            position: sticky;
+            top: 0;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #4CAF50;
+        }
+
+        h1 {
+            font-size: 24px; /* Taille de la police réduite pour le titre */
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h2>Scroll Down</h2>
+    <p>Scroll down to see the sticky effect.</p>
+</div>
+
+<ul>
+    <li>  <a href="detailimpression.jsp">Accueil</a></li>
+    <li><a href="DemandeImpression.jsp">Ajouter demande</a></li>
+    <li><a href="formmatiere.jsp">Ajouter matière</a></li>
+    <li><a href="matiere.jsp">Voir matières</a></li>
+    <li style="float:right"><a href="loginController?logout=true">Déconnexion</a></li>
+</ul>
+
+    <title>Liste des demandes d'impression</title>
+    <script>
+        function telechargerPDF(nomFichier) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'pdf/' + nomFichier, true); // Chemin vers le dossier PDF spécifié
+            xhr.responseType = 'blob';
+
+            xhr.onload = function () {
+                var blob = xhr.response;
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = nomFichier;
+                link.click();
+            };
+
+            xhr.send();
+        }
+    </script>
 </head>
 <body>
     <h1>Liste des demandes d'impression</h1>
@@ -13,17 +89,9 @@
         <input type="submit" name="logout" value="Déconnexion"> <!-- Ajout du paramètre logout -->
     </form>
     
-    <form action="DemandeImpression.jsp" method="get"> <!-- Formulaire pour ajouter une demande -->
-        <input type="submit" value="Ajouter demande">
-    </form>
-    <form action="formmatiere.jsp" method="post"> <!-- Formulaire pour ajouter une matière -->
-        <input type="submit" value="Ajouter matière">
-    </form>
-    <form action="matiere.jsp" method="get"> <!-- Formulaire pour voir les matières -->
-        <input type="submit" value="Voir matières">
-    </form>
+ 
     
-    <table border="1">
+    <table class="w3-table-all w3-hoverable"> <!-- Utilisation de la classe CSS pour le tableau -->
         <thead>
             <tr>
                 <th>ID Enseignant</th>
@@ -35,6 +103,7 @@
                 <%-- Afficher le nom de l'enseignant seulement pour le rôle "imprimeur" --%>
                 <c:if test="${role eq 'imprimeur'}">
                     <th>Nom de l'enseignant</th>
+                    <th>Action</th> <!-- Ajout de la colonne Action pour les imprimeurs -->
                 </c:if>
             </tr>
         </thead>
@@ -66,11 +135,10 @@
                 <td><%= rs.getString("document_pdf") %></td>
                 <%-- Afficher le nom de l'enseignant seulement pour le rôle "imprimeur" --%>
                 <c:if test="${role eq 'imprimeur'}">
-                 <td><%= new controller.detailimpressionController().getNomEnseignant(rs.getInt("enseignant_id")) %></td>
-
-
-                  
-
+                    <td><%= new controller.detailimpressionController().getNomEnseignant(rs.getInt("enseignant_id")) %></td>
+                    <td>
+                        <button type="button" onclick="telechargerPDF('<%= rs.getString("document_pdf") %>')">Imprimer</button>
+                    </td>
                 </c:if>
             </tr>
             <% 

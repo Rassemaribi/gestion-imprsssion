@@ -97,4 +97,24 @@
     <servlet-name>groupController</servlet-name>
     <url-pattern>/groupController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>impressionController</display-name>
+    <servlet-name>impressionController</servlet-name>
+    <servlet-class>controller.impressionController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>impressionController</servlet-name>
+    <url-pattern>/impressionController</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>DefaultServlet</servlet-name>
+    <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
+  </servlet>
+
+  <!-- Mapping du servlet pour servir les fichiers PDF statiques -->
+  <servlet-mapping>
+    <servlet-name>DefaultServlet</servlet-name>
+    <url-pattern>/pdf/*</url-pattern> <!-- Cette URL correspondra aux fichiers PDF statiques -->
+  </servlet-mapping>
 </web-app>

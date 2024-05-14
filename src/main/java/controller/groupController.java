@@ -27,8 +27,8 @@ public class groupController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nomGroup = request.getParameter("nomGroup");
-        int nbPersonne = Integer.parseInt(request.getParameter("nbPersonne"));
+        String nomGroup = request.getParameter("nomgroup");
+        int nbPersonne = Integer.parseInt(request.getParameter("nbPersone"));
         Integer idUser = (Integer) request.getSession().getAttribute("id"); // Récupérer l'ID de l'utilisateur connecté
         
         if (idUser == null) {
@@ -41,7 +41,7 @@ public class groupController extends HttpServlet {
 
         try {
             conn = DB.get_connection();
-            String sqlAjoutGroup = "INSERT INTO `group` (id, nomgroup, nbpersone, id_enseignant) VALUES (?, ?, ?, ?)";
+            String sqlAjoutGroup = "INSERT INTO `groupe` (id, nomgroup, nbpersone, id_enseignant) VALUES (?, ?, ?, ?)";
             stmt = conn.prepareStatement(sqlAjoutGroup);
             stmt.setInt(1, generateRandomId());
             stmt.setString(2, nomGroup);
