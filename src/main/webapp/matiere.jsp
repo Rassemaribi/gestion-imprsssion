@@ -73,16 +73,43 @@
             text-align: center;
             margin-top: 20px;
         }
+          ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+            position: -webkit-sticky; /* Safari */
+            position: sticky;
+            top: 0;
+            width: 100%; /* Étendre la barre de navigation sur toute la largeur */
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <a href="detailimpression.jsp">Accueil</a>
-        <a href="DemandeImpression.jsp">Ajouter demande</a>
-        <a href="formmatiere.jsp">Ajouter matière</a>
-        <a href="matiere.jsp">Voir matières</a>
-        <a style="float:right" href="loginController?logout=true">Déconnexion</a>
-    </div>
+       <ul>
+    <li><a class="active" href="detailimpression.jsp">Accueil</a></li>
+    <li><a href="DemandeImpression.jsp">Ajouter demande</a></li>
+    <li><a href="formmatiere.jsp">Ajouter matière</a></li>
+    <li><a href="matiere.jsp">Voir matières</a></li>
+    <li style="float:right"><a href="loginController?logout=true">Déconnexion</a></li>
+</ul>
 
     <h1>Liste des matières</h1>
     <form action="loginController" method="post">

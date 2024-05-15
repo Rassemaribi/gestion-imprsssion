@@ -33,7 +33,7 @@
             color: white;
             text-align: center;
             padding: 14px 16px;
-            text-decoration: none;
+            text-decoration: none.
         }
 
         li a:hover {
@@ -52,44 +52,51 @@
 <body>
 
 <div class="header">
-    <h2>Scroll Down</h2>
-    <p>Scroll down to see the sticky effect.</p>
+    <% 
+        String prenom = (String) session.getAttribute("username");
+     
+    %>
+    <h2>Bienvenue, <%= prenom %></h2>
 </div>
 
 <ul>
-    <li>  <a href="detailimpression.jsp">Accueil</a></li>
-    <li><a href="DemandeImpression.jsp">Ajouter demande</a></li>
-    <li><a href="formmatiere.jsp">Ajouter matière</a></li>
-    <li><a href="matiere.jsp">Voir matières</a></li>
-    <li style="float:right"><a href="loginController?logout=true">Déconnexion</a></li>
+    <li><a class="active" href="detailimpression.jsp">Accueil</a></li>
+    <c:if test="${role != 'imprimeur'}">
+        <li><a href="DemandeImpression.jsp">Ajouter demande</a></li>
+        <li><a href="formmatiere.jsp">Ajouter matière</a></li>
+        <li><a href="matiere.jsp">Voir matières</a></li>
+        <li><a href="group.jsp">Voir groupes</a></li>
+        <li><a href="formgroup.jsp">Ajouter groupe</a></li>
+    </c:if>
+    <li style="float:right">
+        <form action="loginController" method="post">
+            <input type="submit" name="logout" value="Déconnexion" style="margin-top:14px">
+        </form>
+    </li>
 </ul>
 
-    <title>Liste des demandes d'impression</title>
-    <script>
-        function telechargerPDF(nomFichier) {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'pdf/' + nomFichier, true); // Chemin vers le dossier PDF spécifié
-            xhr.responseType = 'blob';
+<title>Liste des demandes d'impression</title>
+<script>
+    function telechargerPDF(nomFichier) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'pdf/' + nomFichier, true); // Chemin vers le dossier PDF spécifié
+        xhr.responseType = 'blob';
 
-            xhr.onload = function () {
-                var blob = xhr.response;
-                var link = document.createElement('a');
-                link.href = window.URL.createObjectURL(blob);
-                link.download = nomFichier;
-                link.click();
-            };
+        xhr.onload = function () {
+            var blob = xhr.response;
+            var link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = nomFichier;
+            link.click();
+        };
 
-            xhr.send();
-        }
-    </script>
+        xhr.send();
+    }
+</script>
 </head>
 <body>
     <h1>Liste des demandes d'impression</h1>
-    <form action="loginController" method="post">
-        <input type="submit" name="logout" value="Déconnexion"> <!-- Ajout du paramètre logout -->
-    </form>
     
- 
     
     <table class="w3-table-all w3-hoverable"> <!-- Utilisation de la classe CSS pour le tableau -->
         <thead>

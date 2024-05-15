@@ -58,18 +58,18 @@ public class loginController extends HttpServlet {
             } else {
                 // Authentification échouée, afficher un message d'erreur
                 request.setAttribute("erreur", "Nom d'utilisateur ou mot de passe incorrect !");
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
         } catch (SQLException e) {
             e.printStackTrace();
             // Afficher l'erreur SQL
             request.setAttribute("erreur", "Erreur SQL : " + e.getMessage());
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
             // Afficher l'erreur générique
             request.setAttribute("erreur", "Erreur : " + e.getMessage());
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         } finally {
             // Fermeture des ressources
             try {
@@ -84,7 +84,7 @@ public class loginController extends HttpServlet {
         // Gestion de la déconnexion
         if (logoutParam != null && logoutParam.equals("1")) {
             request.getSession().invalidate(); // Invalider la session si le paramètre de déconnexion est présent
-            response.sendRedirect("login.jsp"); // Rediriger vers la page de connexion
+            response.sendRedirect("index.jsp"); // Rediriger vers la page de connexion
         }
     }
 }

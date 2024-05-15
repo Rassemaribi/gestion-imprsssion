@@ -121,12 +121,17 @@
 
     <form action="DemandeImpression" method="post" enctype="multipart/form-data">
         <% 
-            Connection conn = null;
-            try {
-                conn = DB.get_connection();
-                Statement stmtMatiere = conn.createStatement();
-                ResultSet rsMatiere = stmtMatiere.executeQuery("SELECT nommatiere FROM matiere");
-        %>
+                Connection conn = null;
+                ResultSet rsMatiere = null;
+                try {
+                    conn = DB.get_connection();
+                    Integer userId = (Integer) session.getAttribute("id");
+                    if (conn != null && userId != null) {
+                        PreparedStatement stmtMatiere = conn.prepareStatement("SELECT nommatiere FROM matiere WHERE id_enseignant = ?");
+                        stmtMatiere.setInt(1, userId);
+                        rsMatiere = stmtMatiere.executeQuery();
+                    }
+            %>
         
         <div class="row">
             <div class="col-25">
@@ -145,7 +150,7 @@
         <!-- Fermeture des ressources -->
         <% 
                 rsMatiere.close();
-                stmtMatiere.close();
+                
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
@@ -174,13 +179,19 @@
                 <input type="time" id="heure_arrivee" name="heure_arrivee">
             </div>
         </div>
-         <% 
+<% 
     Connection connn = null;
+    ResultSet rsGroupes = null;
     try {
         connn = DB.get_connection();
-        Statement stmtGroupes = connn.createStatement();
-        ResultSet rsGroupes = stmtGroupes.executeQuery("SELECT nbpersone, nomgroup FROM groupe");
+        if (connn != null) {
+            Integer userId = (Integer) session.getAttribute("id");
+            PreparedStatement stmtGroupes = connn.prepareStatement("SELECT nbpersone, nomgroup FROM groupe WHERE id_enseignant = ?");
+            stmtGroupes.setInt(1, userId);
+            rsGroupes = stmtGroupes.executeQuery();
+        }
 %>
+
 
 <div class="row">
     <div class="col-25">
@@ -199,7 +210,7 @@
 <!-- Fermeture des ressources -->
 <% 
         rsGroupes.close();
-        stmtGroupes.close();
+        
     } catch (SQLException e) {
         e.printStackTrace();
     } finally {

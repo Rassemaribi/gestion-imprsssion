@@ -51,7 +51,7 @@ public class groupController extends HttpServlet {
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected > 0) {
                 response.getWriter().println("Groupe créé avec succès !");
-                response.sendRedirect("confirmation.jsp");
+                response.sendRedirect("group.jsp");
             } else {
                 response.getWriter().println("Échec de la création du groupe.");
             }

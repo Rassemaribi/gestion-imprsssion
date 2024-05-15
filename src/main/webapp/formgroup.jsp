@@ -71,25 +71,52 @@
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+         ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+            position: -webkit-sticky; /* Safari */
+            position: sticky;
+            top: 0;
+            width: 100%; /* Étendre la barre de navigation sur toute la largeur */
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
     </style>
 </head>
 <body>
-    <div class="navbar">
-         <a href="detailimpression.jsp">Accueil</a>
-        <a href="DemandeImpression.jsp">Ajouter demande</a>
-        <a href="formmatiere.jsp">Ajouter matière</a>
-        <a href="matiere.jsp">Voir matières</a>
-        <a style="float:right" href="loginController?logout=true">Déconnexion</a>
-    </div>
+    <ul>
+    <li><a class="active" href="detailimpression.jsp">Accueil</a></li>
+    <li><a href="DemandeImpression.jsp">Ajouter demande</a></li>
+    <li><a href="formmatiere.jsp">Ajouter matière</a></li>
+    <li><a href="matiere.jsp">Voir matières</a></li>
+    <li style="float:right"><a href="loginController?logout=true">Déconnexion</a></li>
+</ul>
 
     <h1>Créer un groupe</h1>
 
     <form action="groupController" method="post">
-        <label for="nomGroup">Nom du groupe :</label>
-        <input type="text" id="nomGroup" name="nomGroup" required>
+        <label for="nomgroup">Nom du groupe :</label>
+        <input type="text" id="nomgroup" name="nomgroup" required>
         <br><br>
-        <label for="nbPersonne">Nombre de personnes :</label>
-        <input type="number" id="nbPersonne" name="nbPersonne" required>
+        <label for="nbPersone">Nombre de personnes :</label>
+        <input type="number" id="nbPersone" name="nbPersone" required>
         <br><br>
         <input type="submit" value="Créer">
     </form>
