@@ -62,11 +62,56 @@
             clear: both;
         }
 
-        body {
-            font-size: 16px;
+     body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-        ul {
+      
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td form {
+            display: inline;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 20px;
+        }
+          ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
@@ -93,31 +138,34 @@
         li a:hover {
             background-color: #111;
         }
-
-        .active {
+          .active {
             background-color: #4CAF50;
-        }
-
-        h1 {
-            font-size: 24px; /* Taille de la police réduite pour le titre */
         }
     </style>
 </head>
 <body>
-
 <ul>
     <li><a class="active" href="detailimpression.jsp">Accueil</a></li>
-    <li><a href="DemandeImpression.jsp">Ajouter demande</a></li>
-    <li><a href="formmatiere.jsp">Ajouter matière</a></li>
-    <li><a href="matiere.jsp">Voir matières</a></li>
-    <li style="float:right"><a href="loginController?logout=true">Déconnexion</a></li>
+    <c:if test="${role != 'imprimeur'}">
+        <li><a href="DemandeImpression.jsp">Ajouter demande</a></li>
+        <li><a href="formmatiere.jsp">Ajouter matière</a></li>
+        <li><a href="matiere.jsp">Voir matières</a></li>
+        <li><a href="group.jsp">Voir groupes</a></li>
+        <li><a href="formgroup.jsp">Ajouter groupe</a></li>
+    </c:if>
+    <li style="float:right">
+        <form action="loginController" method="post">
+            <input type="submit" name="logout" value="Déconnexion" style="margin-top:11px" >
+        </form>
+    </li>
 </ul>
+
 <div class="container">
    
 </head>
 <body>
 
-
+<h1>Envoyer une demande d'impression</h1>
 
     <form action="DemandeImpression" method="post" enctype="multipart/form-data">
         <% 

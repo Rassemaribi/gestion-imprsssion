@@ -13,24 +13,7 @@
             padding: 0;
         }
 
-        .navbar {
-            overflow: hidden;
-            background-color: #333;
-        }
-
-        .navbar a {
-            float: left;
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-
-        .navbar a:hover {
-            background-color: #ddd;
-            color: black;
-        }
+      
 
         h1 {
             text-align: center;
@@ -100,21 +83,31 @@
         li a:hover {
             background-color: #111;
         }
+          .active {
+            background-color: #4CAF50;
+        }
     </style>
 </head>
 <body>
-       <ul>
+    <ul>
     <li><a class="active" href="detailimpression.jsp">Accueil</a></li>
-    <li><a href="DemandeImpression.jsp">Ajouter demande</a></li>
-    <li><a href="formmatiere.jsp">Ajouter matière</a></li>
-    <li><a href="matiere.jsp">Voir matières</a></li>
-    <li style="float:right"><a href="loginController?logout=true">Déconnexion</a></li>
+    <c:if test="${role != 'imprimeur'}">
+        <li><a href="DemandeImpression.jsp">Ajouter demande</a></li>
+        <li><a href="formmatiere.jsp">Ajouter matière</a></li>
+        <li><a href="matiere.jsp">Voir matières</a></li>
+        <li><a href="group.jsp">Voir groupes</a></li>
+        <li><a href="formgroup.jsp">Ajouter groupe</a></li>
+    </c:if>
+    <li style="float:right">
+        <form action="loginController" method="post">
+            <input type="submit" name="logout" value="Déconnexion" style="margin-top:11px">
+        </form>
+    </li>
 </ul>
 
+
     <h1>Liste des matières</h1>
-    <form action="loginController" method="post">
-        <input type="submit" name="logout" value="Déconnexion">
-    </form>
+    
     
     <table>
         <thead>
@@ -152,6 +145,10 @@
                         <input type="hidden" name="idMatiere" value="<%= rs.getInt("id") %>">
                         <input type="submit" value="Supprimer">
                     </form>
+                    <form action="updateMatiere.jsp" method="get">
+        <input type="hidden" name="idMatiere" value="<%= rs.getInt("id") %>">
+        <input type="submit" value="Modifier">
+    </form>
                 </td>
             </tr>
             <% 

@@ -107,14 +107,72 @@
     <servlet-name>impressionController</servlet-name>
     <url-pattern>/impressionController</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>DefaultServlet</servlet-name>
     <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
   </servlet>
-
-  <!-- Mapping du servlet pour servir les fichiers PDF statiques -->
   <servlet-mapping>
     <servlet-name>DefaultServlet</servlet-name>
-    <url-pattern>/pdf/*</url-pattern> <!-- Cette URL correspondra aux fichiers PDF statiques -->
+    <url-pattern>/pdf/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>updategroupController</display-name>
+    <servlet-name>updategroupController</servlet-name>
+    <servlet-class>controller.updategroupController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updategroupController</servlet-name>
+    <url-pattern>/updategroupController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>userController</display-name>
+    <servlet-name>userController</servlet-name>
+    <servlet-class>controller.userController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>userController</servlet-name>
+    <url-pattern>/userController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>loginAdminController</display-name>
+    <servlet-name>loginAdminController</servlet-name>
+    <servlet-class>controller.loginAdminController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>loginAdminController</servlet-name>
+    <url-pattern>/loginAdminController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>deleteUserController</display-name>
+    <servlet-name>deleteUserController</servlet-name>
+    <servlet-class>controller.deleteUserController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteUserController</servlet-name>
+    <url-pattern>/deleteUserController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateGroupController</display-name>
+    <servlet-name>UpdateGroupController</servlet-name>
+    <servlet-class>controller.UpdateGroupController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateGroupController</servlet-name>
+    <url-pattern>/UpdateGroupController</url-pattern>
+  </servlet-mapping>
+ <servlet>
+    <description></description>
+    <display-name>UpdateMatiereController</display-name>
+    <servlet-name>UpdateMatiereController</servlet-name>
+    <servlet-class>controller.UpdateMatiereController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateMatiereController</servlet-name>
+    <url-pattern>/UpdateMatiereController</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -13,7 +13,6 @@ import java.sql.SQLException;
 
 import common.DB;
 
-
 public class loginController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -45,15 +44,35 @@ public class loginController extends HttpServlet {
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                // Utilisateur authentifié, récupérer l'ID de l'utilisateur depuis la base de données
-                int id = rs.getInt("id");
+                String role = rs.getString("role");
 
-                // Insérer l'ID de l'utilisateur dans la session
-                request.getSession().setAttribute("id", id);
-                request.getSession().setAttribute("username", username);
+                // Vérifier le rôle de l'utilisateur
+                if ("admin".equals(role)) {
+                    // Utilisateur authentifié en tant qu'admin, récupérer l'ID de l'utilisateur depuis la base de données
+                    int id = rs.getInt("id");
 
-                // Rediriger vers la page de demande d'impression
-                response.sendRedirect("detailimpressionController?id=" + id);
+                    // Insérer l'ID de l'utilisateur dans la session
+                    request.getSession().setAttribute("id", id);
+                    request.getSession().setAttribute("username", username);
+                    request.getSession().setAttribute("role", role); // Définir le rôle dans la session
+
+                    // Rediriger vers la page de détail utilisateur
+                    response.sendRedirect("detailuser.jsp");
+                } else if ("imprimeur".equals(role) || "enseignant".equals(role)) {
+                    // Utilisateur authentifié en tant qu'imprimeur, récupérer l'ID de l'utilisateur depuis la base de données
+                    int id = rs.getInt("id");
+
+                    // Insérer l'ID de l'utilisateur dans la session
+                    request.getSession().setAttribute("id", id);
+                    request.getSession().setAttribute("username", username);
+                    request.getSession().setAttribute("role", role); // Définir le rôle dans la session
+
+                    // Rediriger vers la page de demande d'impression
+                    response.sendRedirect("detailimpressionController?id=" + id);
+                } else {
+                    // Rediriger l'utilisateur non-admin vers une page non autorisée
+                    response.sendRedirect("index.jsp");
+                }
 
             } else {
                 // Authentification échouée, afficher un message d'erreur

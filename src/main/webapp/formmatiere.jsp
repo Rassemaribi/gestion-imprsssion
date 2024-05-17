@@ -6,30 +6,54 @@
 <meta charset="UTF-8">
 <title>Créer une matière</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-    }
+ body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-    .navbar {
-        overflow: hidden;
-        background-color: #333;
-    }
+      
 
-    .navbar a {
-        float: left;
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-    }
+        h1 {
+            text-align: center;
+        }
 
-    .navbar a:hover {
-        background-color: #ddd;
-        color: black;
-    }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td form {
+            display: inline;
+        }
+
+      input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
 
     h1 {
         text-align: center;
@@ -48,29 +72,22 @@
         font-weight: bold;
     }
 
-    input[type="text"] {
-        width: 100%;
-        padding: 8px;
-        margin: 5px 0 15px 0;
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-
-    input[type="submit"] {
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        float: right;
-    }
+         input[type="text"],
+        input[type="number"],
+        input[type="submit"]
+       {
+            width: 100%;
+            padding: 5px 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
 
     input[type="submit"]:hover {
         background-color: #45a049;
     }
-     ul {
+   ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
@@ -79,7 +96,7 @@
             position: -webkit-sticky; /* Safari */
             position: sticky;
             top: 0;
-            width: 100%; /* Étendre la barre de navigation sur toute la largeur */
+          
         }
 
         li {
@@ -97,17 +114,29 @@
         li a:hover {
             background-color: #111;
         }
+          .active {
+            background-color: #4CAF50;
+        }
 </style>
 </head>
 <body>
 
-   <ul>
+ <ul>
     <li><a class="active" href="detailimpression.jsp">Accueil</a></li>
-    <li><a href="DemandeImpression.jsp">Ajouter demande</a></li>
-    <li><a href="formmatiere.jsp">Ajouter matière</a></li>
-    <li><a href="matiere.jsp">Voir matières</a></li>
-    <li style="float:right"><a href="loginController?logout=true">Déconnexion</a></li>
+    <c:if test="${role != 'imprimeur'}">
+        <li><a href="DemandeImpression.jsp">Ajouter demande</a></li>
+        <li><a href="formmatiere.jsp">Ajouter matière</a></li>
+        <li><a href="matiere.jsp">Voir matières</a></li>
+        <li><a href="group.jsp">Voir groupes</a></li>
+        <li><a href="formgroup.jsp">Ajouter groupe</a></li>
+    </c:if>
+    <li style="float:right">
+        <formE action="loginController" method="post">
+            <input type="submit" name="logout" value="Déconnexion"  style="margin-top:7.5px" >
+        </formE>
+    </li>
 </ul>
+
 
 <h1>Créer une matière</h1>
 

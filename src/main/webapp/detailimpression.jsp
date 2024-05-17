@@ -9,11 +9,56 @@
     <meta charset="UTF-8">
     <title>Liste des demandes d'impression</title>
     <style>
-        body {
-            font-size: 14px;
+       body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-        ul {
+      
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td  {
+            display: inline;
+        }
+
+     input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 20px;
+        }
+          ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
@@ -22,6 +67,7 @@
             position: -webkit-sticky; /* Safari */
             position: sticky;
             top: 0;
+            width: 100%; /* Étendre la barre de navigation sur toute la largeur */
         }
 
         li {
@@ -33,19 +79,14 @@
             color: white;
             text-align: center;
             padding: 14px 16px;
-            text-decoration: none.
+            text-decoration: none;
         }
 
         li a:hover {
             background-color: #111;
         }
-
-        .active {
+          .active {
             background-color: #4CAF50;
-        }
-
-        h1 {
-            font-size: 24px; /* Taille de la police réduite pour le titre */
         }
     </style>
 </head>
@@ -59,21 +100,21 @@
     <h2>Bienvenue, <%= prenom %></h2>
 </div>
 
-<ul>
-    <li><a class="active" href="detailimpression.jsp">Accueil</a></li>
-    <c:if test="${role != 'imprimeur'}">
-        <li><a href="DemandeImpression.jsp">Ajouter demande</a></li>
-        <li><a href="formmatiere.jsp">Ajouter matière</a></li>
-        <li><a href="matiere.jsp">Voir matières</a></li>
-        <li><a href="group.jsp">Voir groupes</a></li>
-        <li><a href="formgroup.jsp">Ajouter groupe</a></li>
-    </c:if>
-    <li style="float:right">
-        <form action="loginController" method="post">
-            <input type="submit" name="logout" value="Déconnexion" style="margin-top:14px">
-        </form>
-    </li>
-</ul>
+  <ul>
+        <li><a class="active" href="detailimpression.jsp">Accueil</a></li>
+        <c:if test="${role != 'imprimeur'}">
+            <li><a href="DemandeImpression.jsp">Ajouter demande</a></li>
+            <li><a href="formmatiere.jsp">Ajouter matière</a></li>
+            <li><a href="matiere.jsp">Voir matières</a></li>
+            <li><a href="group.jsp">Voir groupes</a></li>
+            <li><a href="formgroup.jsp">Ajouter groupe</a></li>
+        </c:if>
+        <li style="float:right">
+            <form action="loginController" method="post">
+                <input type="submit" name="logout" value="Déconnexion"style="margin-top:11px">
+            </form>
+        </li>
+    </ul>
 
 <title>Liste des demandes d'impression</title>
 <script>

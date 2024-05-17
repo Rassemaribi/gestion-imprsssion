@@ -21,6 +21,11 @@
     <version>1.4</version> <!-- Update to the latest version -->
 </dependency>
 
+   <dependency>
+   	<groupId>tn.iit</groupId>
+   	<artifactId>Authentificationglid23</artifactId>
+   	<version>0.0.1-SNAPSHOT</version>
+   </dependency>
   </dependencies>
   <build>
     <plugins>

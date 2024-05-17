@@ -5,15 +5,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Liste des groupes</title>
+    <title>Liste des utilisateurs</title>
     <style>
        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
-
-      
 
         h1 {
             text-align: center;
@@ -89,15 +87,11 @@
     </style>
 </head>
 <body>
-    <ul>
-    <li><a class="active" href="detailimpression.jsp">Accueil</a></li>
-    <c:if test="${role != 'imprimeur'}">
-        <li><a href="DemandeImpression.jsp">Ajouter demande</a></li>
-        <li><a href="formmatiere.jsp">Ajouter matière</a></li>
-        <li><a href="matiere.jsp">Voir matières</a></li>
-        <li><a href="group.jsp">Voir groupes</a></li>
-        <li><a href="formgroup.jsp">Ajouter groupe</a></li>
-    </c:if>
+      <ul>
+   <c:if test="${role == 'admin'}">
+    <li><a class="active" href="inscription.jsp">Ajouter un utilisateur</a></li>
+</c:if>
+
     <li style="float:right">
         <form action="loginController" method="post">
             <input type="submit" name="logout" value="Déconnexion" style="margin-top:11px">
@@ -105,70 +99,53 @@
     </li>
 </ul> 
 
+    <h1>Liste des utilisateurs</h1>
 
-    <h1>Liste des groupes</h1>
-   
-
-    <table>
+    <table border="1">
         <thead>
             <tr>
-                <th>ID Groupe</th>
-                <th>Nom du groupe</th>
-                <th>Nombre de personnes</th>
+                <th>ID</th>
+                <th>Rôle</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Username</th>
+                <th>Email</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <% 
             try {
-                Integer userId = (Integer) session.getAttribute("id");
+                Connection conn = common.DB.get_connection(); // Obtenez la connexion à la base de données
 
-                if (userId != null) {
-                    Connection conn = DB.get_connection();
-                    PreparedStatement stmt = conn.prepareStatement("SELECT * FROM `groupe` WHERE id_enseignant = ?");
-                    stmt.setInt(1, userId);
-                    ResultSet rs = stmt.executeQuery();
+                String query = "SELECT id, role, nom, prenom, username, email FROM inscription";
+                PreparedStatement pstmt = conn.prepareStatement(query);
+                ResultSet rs = pstmt.executeQuery();
 
-                    if (!rs.next()) {
+                while (rs.next()) {
             %>
             <tr>
-                <td colspan="4" class="message">Aucun groupe trouvé pour cet utilisateur.</td>
-            </tr>
-            <% 
-                    } else {
-                        do {
-            %>
-            <tr>
-                <td><%= rs.getString("id") %></td>
-                <td><%= rs.getString("nomgroup") %></td>
-                <td><%= rs.getInt("nbpersone") %></td>
-                <td>
-                    <form action="deleteGroupeController" method="post">
-                        <input type="hidden" name="idGroupe" value="<%= rs.getInt("id") %>">
-                        <input type="submit" value="Supprimer">
-                    </form>
-         <form action="updategroup.jsp" method="get">
-    <input type="hidden" name="idGroupe" value="<%= rs.getInt("id") %>">
-    <input type="submit" value="Modifier">
+                <td><%= rs.getInt("id") %></td>
+                <td><%= rs.getString("role") %></td>
+                <td><%= rs.getString("nom") %></td>
+                <td><%= rs.getString("prenom") %></td>
+                <td><%= rs.getString("username") %></td>
+                <td><%= rs.getString("email") %></td>
+                 <td>
+       <form action="deleteUserController" method="post">
+    <input type="hidden" name="idUser" value="<%= rs.getInt("id") %>">
+    <input type="submit" value="Supprimer">
 </form>
 
-                </td>
-            </tr>
-            <% 
-                        } while (rs.next());
-                    }
-                    rs.close();
-                    stmt.close();
-                    conn.close();
-                } else {
-            %>
-            <tr>
-                <td colspan="4" class="message">Utilisateur non connecté.</td>
+    </td>
             </tr>
             <% 
                 }
-            } catch (Exception e) {
-                out.println("Erreur lors de l'affichage : " + e.getMessage());
+                rs.close();
+                pstmt.close();
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
             %>
         </tbody>
