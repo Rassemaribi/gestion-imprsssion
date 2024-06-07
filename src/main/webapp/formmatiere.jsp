@@ -3,42 +3,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Créer une matière</title>
-<style>
- body {
+    <meta charset="UTF-8">
+    <title>Créer un groupe</title>
+    <style>
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
 
-      
-
         h1 {
             text-align: center;
         }
 
-        table {
-            width: 80%;
+        form {
+            width: 50%;
             margin: 20px auto;
-            border-collapse: collapse;
-        }
-
-        th, td {
+            padding: 20px;
             border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
+            border-radius: 5px;
             background-color: #f2f2f2;
         }
 
-        td form {
-            display: inline;
+        label {
+            display: block;
+            margin-bottom: 10px;
         }
 
-      input[type="submit"] {
+        input[type="text"],
+        input[type="number"],
+        input[type="submit"] {
+            width: 100%;
+           padding: 5px 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
             background-color: #4CAF50;
             color: white;
             border: none;
@@ -49,45 +52,7 @@
             background-color: #45a049;
         }
 
-        .message {
-            text-align: center;
-            margin-top: 20px;
-        }
-        
-
-    h1 {
-        text-align: center;
-    }
-
-    form {
-        width: 50%;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #f2f2f2;
-    }
-
-    label {
-        font-weight: bold;
-    }
-
-         input[type="text"],
-        input[type="number"],
-        input[type="submit"]
-       {
-            width: 100%;
-            padding: 5px 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-    input[type="submit"]:hover {
-        background-color: #45a049;
-    }
-   ul {
+        ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
@@ -96,7 +61,7 @@
             position: -webkit-sticky; /* Safari */
             position: sticky;
             top: 0;
-          
+            width: 100%; /* Étendre la barre de navigation sur toute la largeur */
         }
 
         li {
@@ -114,10 +79,11 @@
         li a:hover {
             background-color: #111;
         }
-          .active {
+
+        .active {
             background-color: #4CAF50;
         }
-</style>
+    </style>
 </head>
 <body>
 

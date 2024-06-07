@@ -86,6 +86,7 @@
     </style>
 </head>
 <body>
+
     <ul>
         <li><a class="active" href="detailimpression.jsp">Accueil</a></li>
         <c:if test="${role != 'imprimeur'}">

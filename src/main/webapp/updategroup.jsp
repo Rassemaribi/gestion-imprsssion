@@ -108,8 +108,7 @@
     <%-- Vérifier si le paramètre idGroupe est présent et non null --%>
     <% if(idGroupeParam != null && !idGroupeParam.isEmpty()) { %>
 
-        <%-- Afficher le paramètre idGroupe pour vérification --%>
-        <p>ID du groupe à modifier : <%= idGroupeParam %></p>
+     
 
         <%-- Récupérer les données du groupe depuis la base de données --%>
         <%@ page import="java.sql.*" %>

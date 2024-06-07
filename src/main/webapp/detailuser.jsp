@@ -87,15 +87,23 @@
     </style>
 </head>
 <body>
+<div class="header" style="background-color: #4CAF50; text-align: center; color: white;">
+    <% 
+        String prenom = (String) session.getAttribute("username");
+    %>
+    <h2>Bienvenue, <%= prenom %></h2>
+     <form action="loginController" method="post">
+            <input type="submit" name="logout" value="Déconnexion" style="margin-top:5px">
+        </form>
+</div>
+<br>
       <ul>
    <c:if test="${role == 'admin'}">
     <li><a class="active" href="inscription.jsp">Ajouter un utilisateur</a></li>
 </c:if>
 
     <li style="float:right">
-        <form action="loginController" method="post">
-            <input type="submit" name="logout" value="Déconnexion" style="margin-top:11px">
-        </form>
+       
     </li>
 </ul> 
 

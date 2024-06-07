@@ -147,8 +147,7 @@
 <%-- Vérifier si le paramètre idMatiere est présent et non null --%>
 <% if(idMatiereParam != null && !idMatiereParam.isEmpty()) { %>
 
-    <%-- Afficher le paramètre idMatiere pour vérification --%>
-    <p>ID de la matière à modifier : <%= idMatiereParam %></p>
+  
 
     <%-- Récupérer les données de la matière depuis la base de données --%>
     <%@ page import="java.sql.*" %>
